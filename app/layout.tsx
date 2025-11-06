@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import Analytics from '@/components/Analytics'
+import { Suspense } from 'react' // ← أضف السطر ده
 
 export const metadata: Metadata = {
   title: 'Smart Medical Content Creator - مولد محتوى طب الأسنان',
@@ -33,19 +34,19 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <head>
-        {/* Google Fonts - Cairo للعربية */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
-        
-        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
         {children}
-        <Analytics />
-        
-        {/* Google Analytics 4 */}
+
+        {/* حماية useSearchParams داخل Suspense */}
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
+
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           strategy="afterInteractive"
