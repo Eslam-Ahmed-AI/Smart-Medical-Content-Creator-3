@@ -12,7 +12,7 @@ export default function Analytics() {
       // تتبع تغيير الصفحات
       window.gtag('event', 'page_view', {
         page_path: pathname,
-        page_search: searchParams?.toString() || '',
+        page_search: searchParams?.toString() ?? '',
         page_title: document.title,
       })
     }
