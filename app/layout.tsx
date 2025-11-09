@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import Analytics from '@/components/Analytics'
-import { Suspense } from 'react' // ← أضف السطر ده
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Smart Medical Content Creator - مولد محتوى طب الأسنان',
@@ -31,6 +31,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // ✅ حط الـ GA ID هنا مباشرة
+  const GA_ID = 'G-PTXCTWWVGV';
+  
   return (
     <html lang="ar" dir="rtl">
       <head>
@@ -47,8 +50,9 @@ export default function RootLayout({
           <Analytics />
         </Suspense>
 
+        {/* ✅ Google Analytics 4 - بالـ ID الصحيح */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -56,10 +60,13 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+            gtag('config', '${GA_ID}', {
               page_path: window.location.pathname,
-              cookie_flags: 'SameSite=None;Secure'
+              send_page_view: true
             });
+            
+            // للتأكد إن GA4 شغال
+            console.log('✅ GA4 Initialized:', '${GA_ID}');
           `}
         </Script>
       </body>
