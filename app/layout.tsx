@@ -9,11 +9,18 @@ export const metadata: Metadata = {
   description: 'أداة ذكية لتوليد محتوى احترافي لأطباء الأسنان على السوشيال ميديا في دقائق',
   keywords: 'طب الأسنان, محتوى سوشيال ميديا, تسويق طبي, أطباء الأسنان, محتوى طبي',
   authors: [{ name: 'Smart Medical Content Creator' }],
+  
+  // ✅ تم إضافة هذا السطر لتحديد الرابط الرئيسي
+  metadataBase: new URL('https://smart-medical-content-creator-3.vercel.app'),
+
   openGraph: {
     title: 'Smart Medical Content Creator - مولد محتوى طب الأسنان',
     description: 'أداة ذكية لتوليد محتوى احترافي لأطباء الأسنان',
     type: 'website',
     locale: 'ar_EG',
+    
+    // ✅ تم إضافة هذا السطر لتحديد الرابط الرسمي في الـ Open Graph
+    url: 'https://smart-medical-content-creator-3.vercel.app',
   },
   twitter: {
     card: 'summary_large_image',
