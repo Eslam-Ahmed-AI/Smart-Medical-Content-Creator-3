@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'أداة ذكية لتوليد محتوى احترافي لأطباء الأسنان على السوشيال ميديا في دقائق',
   keywords: 'طب الأسنان, محتوى سوشيال ميديا, تسويق طبي, أطباء الأسنان, محتوى طبي',
   authors: [{ name: 'Smart Medical Content Creator' }],
-  
-  // ✅ تم إضافة هذا السطر لتحديد الرابط الرئيسي
+
+  // الرابط الرئيسي للموقع
   metadataBase: new URL('https://smart-medical-content-creator-3.vercel.app'),
 
   openGraph: {
@@ -18,15 +18,26 @@ export const metadata: Metadata = {
     description: 'أداة ذكية لتوليد محتوى احترافي لأطباء الأسنان',
     type: 'website',
     locale: 'ar_EG',
-    
-    // ✅ تم إضافة هذا السطر لتحديد الرابط الرسمي في الـ Open Graph
     url: 'https://smart-medical-content-creator-3.vercel.app',
+
+    // ✅ صورة OG من فولدر public
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Smart Medical Content Creator - مولد محتوى طب الأسنان',
+      }
+    ],
   },
+
   twitter: {
     card: 'summary_large_image',
     title: 'Smart Medical Content Creator',
     description: 'أداة ذكية لتوليد محتوى احترافي لأطباء الأسنان',
+    images: ['/og-image.png'], // صورة Twitter card نفس OG
   },
+
   robots: {
     index: true,
     follow: true,
@@ -38,7 +49,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // ✅ حط الـ GA ID هنا مباشرة
   const GA_ID = 'G-PTXCTWWVGV';
   
   return (
@@ -47,7 +57,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
-        <link rel="icon" href="/favicon.ico" />
+
+        {/* ✅ Favicon من فولدر public */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
       </head>
       <body>
         {children}
@@ -57,7 +69,7 @@ export default function RootLayout({
           <Analytics />
         </Suspense>
 
-        {/* ✅ Google Analytics 4 - بالـ ID الصحيح */}
+        {/* ✅ Google Analytics 4 */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
@@ -72,7 +84,6 @@ export default function RootLayout({
               send_page_view: true
             });
             
-            // للتأكد إن GA4 شغال
             console.log('✅ GA4 Initialized:', '${GA_ID}');
           `}
         </Script>
